@@ -1,20 +1,26 @@
 Installation
 ============
 
+There are two ways to use PyAMS:
+
+* as a **Python library** (``pyams-lib``), installed with pip, or
+* inside the **CAD system** (the PyAMS application or the VS Code extension).
+
 Requirements
 ------------
 
 * Python 3.8 or later (CPython or PyPy), on Linux, Windows or macOS
-* `NumPy <https://numpy.org>`_ and `Matplotlib <https://matplotlib.org>`_ (installed automatically)
+* `NumPy <https://numpy.org>`_ and `Matplotlib <https://matplotlib.org>`_
 
-Install with pip
-----------------
+Install as a Python library
+---------------------------
 
 .. code-block:: sh
 
     pip install pyams-lib
 
-The names ``pyams-lib`` and ``pyams_lib`` are equivalent for pip.
+NumPy and Matplotlib are installed automatically. The names ``pyams-lib`` and ``pyams_lib``
+are equivalent for pip.
 
 To upgrade to the latest version:
 
@@ -23,7 +29,7 @@ To upgrade to the latest version:
     pip install --upgrade pyams-lib
 
 Use a virtual environment (recommended)
----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: sh
 
@@ -31,32 +37,21 @@ Use a virtual environment (recommended)
     source .venv/bin/activate        # Windows: .venv\Scripts\activate
     pip install pyams-lib
 
-Check the installation
+Install the CAD system
 ----------------------
 
-.. code-block:: python
+The CAD system lets you design circuits (schematic capture), design symbols and run simulations.
+Choose one of the following:
 
-    from pyams.lib import circuit
-    from pyams.models import Resistor, DCVoltage
+1. **PyAMS application:** download it from https://pyams.sf.net.
+2. **PyAMS extension for VS Code:** install it from the VS Code Extensions view.
 
-    V1 = DCVoltage("In", "0");  V1.setParams("Vdc=12V")
-    R1 = Resistor("In", "Out"); R1.setParams("R=2KΩ")
-    R2 = Resistor("Out", "0");  R2.setParams("R=1KΩ")
+.. note::
 
-    cir = circuit()
-    cir.addElements({"V1": V1, "R1": R1, "R2": R2})
-    cir.setOutPuts("Out")
-    cir.analysis(mode="dc")
-    print(cir.run()["Out"][0])       # 4.0
+   The PyAMS application and the VS Code extension already include the ``pyams`` library,
+   so you do **not** need to install it with pip. You only need Python with the
+   ``numpy`` and ``matplotlib`` packages:
 
-Install from source
--------------------
+   .. code-block:: sh
 
-.. code-block:: sh
-
-    git clone https://github.com/d-fathi/pyams_lib
-    cd pyams_lib
-    pip install .
-
-Note that the package is imported as ``pyams`` (``from pyams.lib import circuit``)
-although it is installed as ``pyams-lib``.
+       pip install numpy matplotlib

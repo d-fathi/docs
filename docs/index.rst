@@ -1,30 +1,106 @@
-PyAMS (Python for Analog and Mixed Signals)
-===========================================
+Welcome to the PyAMS documentation
+==================================
 
-**PyAMS** is a Python library for modeling and simulating analog and mixed-signal
-electronic circuits. You describe a circuit by connecting ready-made (or your own)
-models through node names, choose an analysis — DC, transient or AC — run it, and
-plot or post-process the results with NumPy and Matplotlib.
+.. image:: https://img.shields.io/pypi/v/pyams-lib.svg
+    :target: https://pypi.org/project/pyams-lib/
+    :alt: PyPI version
+
+.. image:: https://img.shields.io/pypi/pyversions/pyams-lib.svg
+    :target: https://pypi.org/project/pyams-lib/
+    :alt: Supported Python versions
+
+.. image:: https://img.shields.io/github/license/d-fathi/pyams_lib.svg
+    :target: https://github.com/d-fathi/pyams_lib/blob/main/LICENSE
+    :alt: License
+
+What is PyAMS?
+--------------
+
+**PyAMS** (*Python for Analog and Mixed Signals*) is a Python library for modeling and
+simulating analog and mixed-signal electronic circuits. It provides:
+
+- The ability to create **custom models** of electronic components.
+- **Simulation** of circuits in different modes of operation: DC, transient (TR) and AC.
+- **Visualization** of the results with ``matplotlib`` in Python, or with ``Plotly`` in the CAD system.
+- Compatibility with **Python 3+ and PyPy**, on Linux, Windows and macOS.
+- **Circuit design** (schematic capture, symbol design and simulation) in a CAD environment, using either:
+
+  1. **VS Code**, with the *PyAMS extension*.
+  2. The **PyAMS software**: https://pyams.sf.net
+
+Quick start
+-----------
 
 .. code-block:: sh
 
     pip install pyams-lib
 
-.. code-block:: python
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
 
-    from pyams.lib import circuit
-    from pyams.models import Resistor, SinVoltage, Diode
+   overview
+   installation
+   modeling
+   simulation
+   models/index
+   examples/index
 
-    V1 = SinVoltage("In", "0");  V1.setParams("Va=10V Fr=2Hz")
-    D1 = Diode("In", "Out")
-    R1 = Resistor("Out", "0");   R1.setParams("R=1KΩ")
 
-    cir = circuit()
-    cir.addElements({"V1": V1, "D1": D1, "R1": R1})
-    cir.setOutPuts("In", "Out")
-    cir.analysis(mode="tran", start=0, stop=2, step=0.001)
-    cir.run()
-    cir.plot()
+.. panels::
+
+    :ref:`News <news-page>`
+
+    What's changed in versions
+
+    ---
+
+    :ref:`Installation <Installation-page>`
+
+    How to install pyams.lib in python
+
+    ---
+
+    :ref:`Modeling <modeling-page>`
+
+    Guidelines to method of modeling of analog elements by pyams.lib.
+
+    ---
+    
+    :ref:`Simulation <simulation-page>`
+
+    The method of conception and simulation circuits.
+
+    ---
+    
+    :ref:`Analog-devices <Analog-devices>`
+
+    PyAMS elements and models of analog.
+
+    ---
+    
+    :ref:`Digital-devices <Digital-devices>`
+
+    PyAMS elements and models of digital.
+
+    ---
+
+    :ref:`Examples <examples-page>`
+
+    Circuit simulator examples.
+
+    ---
+
+    :ref:`Commands <commands-manual-page>`
+
+    The pyams.lib command syntax for simulation.
+
+    ---
+
+
+
+
+
 
 .. toctree::
    :maxdepth: 2
