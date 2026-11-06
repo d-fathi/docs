@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="28 24 68 44" width="680" height="440">
+  <rect x="28" y="24" width="68" height="44" fill="white"/>
+  <!-- pins -->
+  <g fill="none" stroke="rgb(255,0,0)" stroke-width="1">
+    <polyline points="35,40 45,40"/>
+    <polyline points="90,40 80,40"/>
+  </g>
+  <g fill="none" stroke="rgb(0,200,0)" stroke-width="1">
+    <rect x="32" y="37" width="6" height="6"/>
+    <rect x="87" y="37" width="6" height="6"/>
+  </g>
+  <!-- body -->
+  <rect x="44" y="35" width="36" height="10" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="45,30 55,30 70,50 80,50" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <!-- labels -->
+  <g font-family="'Times New Roman', serif" font-size="6" fill="black" text-anchor="middle">
+    <text x="35" y="50">p</text>
+    <text x="90" y="50">n</text>
+  </g>
+  <g font-family="'Times New Roman', serif" font-size="7" fill="rgb(17,162,41)" text-anchor="middle">
+    <text x="62" y="60">R1</text>
+  </g>
+</svg>

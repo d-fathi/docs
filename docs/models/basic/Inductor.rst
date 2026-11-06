@@ -5,8 +5,8 @@ Inductor
 
     from pyams.models import Inductor
 
-    X1 = Inductor("p", "n")
-    X1.setParams("L=0.001")
+    L1 = Inductor("p", "n")
+    L1.setParams("L=1e-3")
 
 Terminals
 ---------
@@ -25,41 +25,64 @@ Parameters
      - Unit
      - Description
    * - ``L``
-     - 0.001
+     - 1e-3
      - H
      - Inductor value
+
+Symbol
+------
+
+.. figure:: /_static/images/symbols/Inductor_symbol.svg
+   :alt: Inductor symbol
+   :align: center
+   :width: 200px
+
+   Inductor symbol as displayed in the PyAMS application.
 
 Description
 -----------
 
-The documentation of the class (``help(Inductor)``)::
+This class implements an Inductor model.
 
-    This class implements an Inductor model.
+An inductor stores energy in a magnetic field and the voltage across it is
+proportional to the rate of change of its current.
 
-    An inductor stores energy in a magnetic field and the voltage across it is
-    proportional to the rate of change of its current.
+**Attributes**
 
-    Attributes:
-        I (signal): Input current signal through the inductor, defined between nodes (p, n).
-        V (signal): Output voltage signal across the inductor, defined between nodes (p, n).
-        L (param): Inductance value in Henries (H), default is 1.0e-3 H.
+* ``I`` (signal): Input current signal through the inductor, defined between nodes (p, n).
+* ``V`` (signal): Output voltage signal across the inductor, defined between nodes (p, n).
+* ``L`` (param): Inductance value in Henries (H), default is 1.0e-3 H.
 
-    Methods:
-        analog(): Defines the inductor behavior using the equation:
-                  V = L * dI/dt
+**Methods**
 
-    Note: the inductor imposes the voltage V, so its current is an extra unknown
-    of the circuit (the 'in' current signal reads it).  In a DC analysis
-    dI/dt = 0, so the inductor behaves as a short circuit.
+* ``analog()``: Defines the inductor behavior using the equation:
 
-Used in the examples
---------------------
+  .. math::
 
-* :doc:`Series RLC circuit (inductor example) </examples/rlc>`
-* :doc:`AC analysis (small-signal frequency response) </examples/ac_analysis>`
-* :doc:`Elliptic (Cauer) RLC low-pass filter </examples/elliptic_filter>`
-* :doc:`Dependent (controlled) sources: VCVS, CCVS, VCCS, CCCS </examples/dependent_sources>`
-* :doc:`IGBT chopper (low-side switch, inductive load, freewheel diode) </examples/igbt_chopper>`
-* :doc:`Tunnel diode oscillator </examples/tunnel_diode_oscillator>`
-* :doc:`Chua's circuit with op-amps (double-scroll chaotic oscillator) </examples/chua_opamp>`
+     V = L \frac{dI}{dt}
 
+.. note::
+
+   The inductor imposes the voltage ``V``, so its current is an extra unknown
+   of the circuit (the ``in`` current signal reads it). In a DC analysis
+   ``dI/dt = 0``, so the inductor behaves as a short circuit.
+
+Source Code
+-----------
+
+.. code-block:: python
+
+    from pyams.lib import model, signal, param
+    from pyams.lib import voltage, current
+    from pyams.lib import ddt
+
+
+    class Inductor(model):
+
+        def __init__(self, p, n):
+            self.I = signal('in', current, p, n)
+            self.V = signal('out', voltage, p, n)
+            self.L = param(1.0e-3, 'H', 'Inductor value')
+
+        def analog(self):
+            self.V += self.L * ddt(self.I)

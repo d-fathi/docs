@@ -5,13 +5,15 @@ DC Current
 
     from pyams.models import DCCurrent
 
-    X1 = DCCurrent("p", "n")
-    X1.setParams("Idc=0.001")
+    I1 = DCCurrent("p", "n")
+    I1.setParams("Idc=1e-3")
 
 Terminals
 ---------
 
 ``DCCurrent(p, n)``
+
+A positive current flows through the source from ``p`` to ``n``.
 
 Parameters
 ----------
@@ -25,36 +27,60 @@ Parameters
      - Unit
      - Description
    * - ``Idc``
-     - 0.001
+     - 1e-3
      - A
      - Constant current value
+
+Symbol
+------
+
+.. figure:: /_static/images/symbols/DCCurrent_symbol.svg
+   :alt: DC current source symbol
+   :align: center
+   :width: 160px
+
+   DC current source symbol as displayed in the PyAMS application.
 
 Description
 -----------
 
-The documentation of the class (``help(DCCurrent)``)::
+This class models a constant (DC) current source.
 
-    This class models a constant (DC) current source.
+The current is :math:`I = I_{dc}` at all times, whatever the voltage across it
+(a bias current, a charging current, the tail current of a pair, ...).
 
-    The current is  I = Idc  at all times, whatever the voltage across it
-    (a bias current, a charging current, the tail current of a pair ...).
+**Direction** (same as the SPICE source ``I p n``): a positive current flows
+through the source from node ``p`` to node ``n``, that is, it is taken out of
+node ``p`` and pushed into node ``n``. A source from ``"0"`` to ``"x"`` with
+``Idc > 0`` therefore raises the voltage of node ``x``.
 
-    Direction (same as the SPICE source "I p n"): a positive current flows
-    through the source from node p to node n, i.e. it is taken out of node p
-    and pushed into node n.  A source from "0" to "x" with Idc > 0 therefore
-    raises the voltage of node x.
+**Attributes**
 
-    Attributes:
-        I (signal): Current through the source, from p to n.
-        Idc (param): Current value in Amperes (A), default is 1 mA.
+* ``I`` (signal): Current through the source, from p to n.
+* ``Idc`` (param): Current value in Amperes (A), default is 1 mA.
 
-    Methods:
-        analog(): Implements the equation I = Idc.
+**Methods**
 
-Used in the examples
---------------------
+* ``analog()``: Implements the constant current equation:
 
-* :doc:`Current sources: DCCurrent, SinCurrent, TrapezoidCurrent </examples/current_sources>`
-* :doc:`Thyristor I(V) with several gate currents (IG0 ... IG3) </examples/thyristor_iv_family>`
-* :doc:`UJT relaxation oscillator </examples/ujt_oscillator>`
+  .. math::
 
+     I = I_{dc}
+
+Source Code
+-----------
+
+.. code-block:: python
+
+    from pyams.lib import signal, param, model
+    from pyams.lib import current
+
+
+    class DCCurrent(model):
+
+        def __init__(self, p, n):
+            self.I = signal('out', current, p, n)
+            self.Idc = param(1e-3, 'A', 'Constant current value')
+
+        def analog(self):
+            self.I += self.Idc

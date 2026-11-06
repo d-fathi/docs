@@ -5,8 +5,8 @@ Capacitor with Initial Voltage
 
     from pyams.models import CapacitorIc
 
-    X1 = CapacitorIc("p", "n")
-    X1.setParams("C=1e-06 Ic=0")
+    C1 = CapacitorIc("p", "n")
+    C1.setParams("C=1e-6 Ic=0")
 
 Terminals
 ---------
@@ -25,7 +25,7 @@ Parameters
      - Unit
      - Description
    * - ``C``
-     - 1e-06
+     - 1e-6
      - F
      - Capacitance
    * - ``Ic``
@@ -33,28 +33,70 @@ Parameters
      - V
      - Initial voltage
 
+Symbol
+------
+
+.. figure:: /_static/images/symbols/CapacitorIc_symbol.svg
+   :alt: Capacitor with initial voltage symbol
+   :align: center
+   :width: 200px
+
+   Capacitor with initial voltage symbol as displayed in the PyAMS application.
+
 Description
 -----------
 
-The documentation of the class (``help(CapacitorIc)``)::
+This class implements a Capacitor model with an initial voltage
+(SPICE ``C ... IC=``).
 
-    Capacitor with an initial voltage (SPICE ``C ... IC=``).
+The capacitor is written in integral form, with the current ``I`` flowing
+from ``p`` to ``n``:
 
-        V(t) = Ic + (1/C) integral(I dt)          (I flows p -> n)
+.. math::
 
-    The capacitor is written in integral form: in the operating point at the
-    start of a transient the integral is zero, so the capacitor is held at V = Ic
-    (like ``.ic``/UIC in SPICE) and then evolves freely.  Use it together with
-    InductorIc and a normal transient analysis (do not use ``uic=True``).
+   V(t) = I_c + \frac{1}{C} \int I \, dt
 
-    Terminals: CapacitorIc(p, n)
-    Parameters:
-        C    capacitance (F)           (1 uF)
-        Ic   initial voltage V(p)-V(n) (V)   (0)
+In the operating point at the start of a transient analysis the integral is
+zero, so the capacitor is held at ``V = Ic`` (like ``.ic`` / UIC in SPICE) and
+then evolves freely.
 
-Used in the examples
---------------------
+**Attributes**
 
-* :doc:`Van der Pol oscillator:  C v'' + Mu (v^2 - 1) v' + v/L = 0 </examples/van_der_pol>`
-* :doc:`Van der Pol oscillator: parametric sweep of Mu with cir.sweep(param="R1.Mu", list=[...]) </examples/van_der_pol_sweep>`
+* ``I`` (signal): Input current signal through the capacitor, defined between nodes (p, n).
+* ``V`` (signal): Output voltage signal across the capacitor, defined between nodes (p, n).
+* ``C`` (param): Capacitance value in Farads (F), default is 1.0e-6 F.
+* ``Ic`` (param): Initial voltage V(p) - V(n) in Volts (V), default is 0 V.
 
+**Methods**
+
+* ``analog()``: Defines the capacitor behavior using the integral form:
+
+  .. math::
+
+     V = I_c + \frac{1}{C} \int I \, dt
+
+.. note::
+
+   Use it together with ``InductorIc`` and a normal transient analysis
+   (do not use ``uic=True``).
+
+Source Code
+-----------
+
+.. code-block:: python
+
+    from pyams.lib import signal, param, model
+    from pyams.lib import voltage, current
+    from pyams.lib import idt
+
+
+    class CapacitorIc(model):
+
+        def __init__(self, p, n):
+            self.I = signal('in', current, p, n)
+            self.V = signal('out', voltage, p, n)
+            self.C = param(1.0e-6, 'F', 'Capacitance')
+            self.Ic = param(0.0, 'V', 'Initial voltage')
+
+        def analog(self):
+            self.V += idt(self.I / self.C, self.Ic)

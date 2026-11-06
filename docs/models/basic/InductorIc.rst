@@ -5,8 +5,8 @@ Inductor with Initial Current
 
     from pyams.models import InductorIc
 
-    X1 = InductorIc("p", "n")
-    X1.setParams("L=0.001 Ic=0")
+    L1 = InductorIc("p", "n")
+    L1.setParams("L=1e-3 Ic=0")
 
 Terminals
 ---------
@@ -25,7 +25,7 @@ Parameters
      - Unit
      - Description
    * - ``L``
-     - 0.001
+     - 1e-3
      - H
      - Inductance
    * - ``Ic``
@@ -33,27 +33,68 @@ Parameters
      - A
      - Initial current
 
+Symbol
+------
+
+.. figure:: /_static/images/symbols/InductorIc_symbol.svg
+   :alt: Inductor with initial current symbol
+   :align: center
+   :width: 200px
+
+   Inductor with initial current symbol as displayed in the PyAMS application.
+
 Description
 -----------
 
-The documentation of the class (``help(InductorIc)``)::
+This class implements an Inductor model with an initial current
+(SPICE ``L ... IC=``).
 
-    Inductor with an initial current (SPICE ``L ... IC=``).
+The inductor is written in integral form, with the current ``I`` flowing
+from ``p`` to ``n``:
 
-        I(t) = Ic + (1/L) integral(V dt)          (I flows p -> n)
+.. math::
 
-    Written in integral form, so at the start of the transient (operating
-    point) the inductor carries exactly Ic and then evolves freely.  Use it
-    with a normal transient analysis (not ``uic=True``).
+   I(t) = I_c + \frac{1}{L} \int V \, dt
 
-    Terminals: InductorIc(p, n)
-    Parameters:
-        L    inductance (H)            (1 mH)
-        Ic   initial current p -> n (A)    (0)
+At the start of the transient analysis (operating point) the inductor carries
+exactly ``Ic`` and then evolves freely.
 
-Used in the examples
---------------------
+**Attributes**
 
-* :doc:`Van der Pol oscillator:  C v'' + Mu (v^2 - 1) v' + v/L = 0 </examples/van_der_pol>`
-* :doc:`Van der Pol oscillator: parametric sweep of Mu with cir.sweep(param="R1.Mu", list=[...]) </examples/van_der_pol_sweep>`
+* ``V`` (signal): Input voltage signal across the inductor, defined between nodes (p, n).
+* ``I`` (signal): Output current signal through the inductor, defined between nodes (p, n).
+* ``L`` (param): Inductance value in Henries (H), default is 1.0e-3 H.
+* ``Ic`` (param): Initial current from p to n in Amperes (A), default is 0 A.
 
+**Methods**
+
+* ``analog()``: Defines the inductor behavior using the integral form:
+
+  .. math::
+
+     I = I_c + \frac{1}{L} \int V \, dt
+
+.. note::
+
+   Use it with a normal transient analysis (not ``uic=True``).
+
+Source Code
+-----------
+
+.. code-block:: python
+
+    from pyams.lib import signal, param, model
+    from pyams.lib import voltage, current
+    from pyams.lib import idt
+
+
+    class InductorIc(model):
+
+        def __init__(self, p, n):
+            self.V = signal('in', voltage, p, n)
+            self.I = signal('out', current, p, n)
+            self.L = param(1.0e-3, 'H', 'Inductance')
+            self.Ic = param(0.0, 'A', 'Initial current')
+
+        def analog(self):
+            self.I += idt(self.V / self.L, self.Ic)

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="84 22 58 66" width="580" height="660">
+  <rect x="84" y="22" width="58" height="66" fill="white"/>
+  <polyline points="105,30 105,40" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <polyline points="105,80 105,70" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <rect x="102" y="27" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <rect x="102" y="77" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <circle cx="105" cy="55" r="15" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="105,45 105,65" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="105,65 108,60" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="105,65 102,60" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <text x="111" y="35" font-family="'Times New Roman', serif" font-size="6" fill="black" >p</text>
+  <text x="111" y="82" font-family="'Times New Roman', serif" font-size="6" fill="black" >n</text>
+  <text x="125" y="57" font-family="'Times New Roman', serif" font-size="7" fill="rgb(17,162,41)" >I1</text>
+</svg>

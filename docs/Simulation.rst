@@ -13,7 +13,7 @@ The analysis is chosen with ``cir.analysis(mode=...)`` and executed with ``cir.r
    * - ``"dc"``
      - operating point
      - –
-   * - ``"dc"`` with ``param=``
+   * - ``"dc"``
      - DC sweep (I–V curves, transfer curves)
      - ``param``, ``start``, ``stop``, ``step``
    * - ``"tran"``

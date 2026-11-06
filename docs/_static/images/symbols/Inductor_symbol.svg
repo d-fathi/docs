@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="48 36 62 40" width="620" height="400">
+  <rect x="48" y="36" width="62" height="40" fill="white"/>
+  <!-- pins -->
+  <polyline points="55,60 65,60" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <rect x="52" y="57" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <polyline points="105,60 95,60" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <rect x="102" y="57" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <!-- body -->
+  <g fill="none" stroke="rgb(33,150,243)" stroke-width="1">
+    <polyline points="66,60 60,60"/>
+    <polyline points="100,60 94,60"/>
+    <path d="M 66 60 A 6 12 0 1 1 76.24264068711929 68.48528137423855"/>
+    <path d="M 76.09525175926419 69.11107922838356 A 6 12 0 1 1 83.84110639798689 69.2186553551685"/>
+    <path d="M 84.09525175926419 69.11107922838356 A 6 12 0 1 1 94 60"/>
+  </g>
+  <!-- labels -->
+  <g font-family="'Times New Roman', serif" font-size="6" fill="rgb(17,162,41)" text-anchor="middle">
+    <text x="80" y="43">L1</text>
+  </g>
+  <g font-family="'Times New Roman', serif" font-size="6" fill="black" text-anchor="middle">
+    <text x="55" y="72">p</text>
+    <text x="105" y="72">n</text>
+  </g>
+</svg>

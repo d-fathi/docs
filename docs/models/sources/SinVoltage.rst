@@ -1,17 +1,19 @@
-Sinusoidal Voltage
-==================
+Sin Voltage
+===========
 
 .. code-block:: python
 
     from pyams.models import SinVoltage
 
-    X1 = SinVoltage("p", "n")
-    X1.setParams("Fr=100 Va=10")
+    V1 = SinVoltage("p", "n")
+    V1.setParams("Va=10 Fr=100")
 
 Terminals
 ---------
 
 ``SinVoltage(p, n)``
+
+``p`` is the positive terminal: V(p) - V(n) = V.
 
 Parameters
 ----------
@@ -41,38 +43,59 @@ Parameters
      - V
      - Voltage offset
 
+Symbol
+------
+
+.. figure:: /_static/images/symbols/SinVoltage_symbol.svg
+   :alt: Sine wave voltage source symbol
+   :align: center
+   :width: 160px
+
+   Sine wave voltage source symbol as displayed in the PyAMS application.
+
 Description
 -----------
 
-The documentation of the class (``help(SinVoltage)``)::
+This class models a sinusoidal voltage source.
 
-    This class models a Sinusoidal Voltage Source.
+The voltage waveform follows the equation:
 
-    The voltage waveform follows the equation:
-        V(t) = Va * sin(2π * Fr * t + Ph) + Voff
+.. math::
 
-    Attributes:
-        V (signal): Output voltage.
-        Fr (param): Frequency of the sine wave (Hz).
-        Va (param): Amplitude of the sine wave (V).
-        Ph (param): Phase shift in degrees (°).
-        Voff (param): Voltage offset (V).
+   V(t) = V_a \sin(2 \pi \, F_r \, t + \varphi) + V_{off}
 
-    Methods:
-        analog(): Implements the sinusoidal voltage equation.
+where the phase ``Ph`` is given in degrees.
 
-Used in the examples
---------------------
+**Attributes**
 
-* :doc:`Half wave rectification circuit </examples/half_wave_rectifier>`
-* :doc:`Full-wave bridge rectifier fed by a transformer </examples/bridge_rectifier>`
-* :doc:`Zener diode: I(V) characteristic and shunt regulator </examples/zener_regulator>`
-* :doc:`AC analysis (small-signal frequency response) </examples/ac_analysis>`
-* :doc:`Elliptic (Cauer) RLC low-pass filter </examples/elliptic_filter>`
-* :doc:`idt() example: an inductor written with the integral </examples/idt_example>`
-* :doc:`JFET common-source amplifier (self bias) </examples/jfet_amplifier>`
-* :doc:`Thyristor phase control (half-wave, resistive load) </examples/thyristor_phase_control>`
-* :doc:`Thyristor lamp dimmer (half-wave phase control, three angles) </examples/thyristor_lamp_dimmer>`
-* :doc:`Schmitt trigger with two BJT transistors (emitter coupled) </examples/schmitt_bjt>`
-* :doc:`Schmitt trigger with an op-amp (inverting) </examples/schmitt_opamp>`
+* ``V`` (signal): Output voltage between nodes (p, n).
+* ``Fr`` (param): Frequency of the sine wave in Hertz (Hz), default is 100 Hz.
+* ``Va`` (param): Amplitude of the sine wave in Volts (V), default is 10 V.
+* ``Ph`` (param): Phase shift in degrees (°), default is 0.
+* ``Voff`` (param): Voltage offset in Volts (V), default is 0.
 
+**Methods**
+
+* ``analog()``: Implements the sinusoidal voltage equation.
+
+Source Code
+-----------
+
+.. code-block:: python
+
+    from pyams.lib import signal, param, model, time
+    from pyams.lib import voltage
+    from math import sin, pi
+
+
+    class SinVoltage(model):
+
+        def __init__(self, p, n):
+            self.V = signal('out', voltage, p, n)
+            self.Fr = param(100.0, 'Hz', 'Frequency of sine wave')
+            self.Va = param(10.0, 'V', 'Amplitude of sine wave')
+            self.Ph = param(0.0, '°', 'Phase of sine wave')
+            self.Voff = param(0.0, 'V', 'Voltage offset')
+
+        def analog(self):
+            self.V += self.Va * sin(2 * pi * self.Fr * time + (self.Ph * pi / 180.0)) + self.Voff

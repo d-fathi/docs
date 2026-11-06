@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="48 22 76 64" width="760" height="640">
+  <rect x="48" y="22" width="76" height="64" fill="white"/>
+  <g>
+    <polyline points="90,30 90,40" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+    <polyline points="90,80 90,70" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+    <polyline points="65,30 65,40" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+    <polyline points="65,80 65,70" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+    <rect x="87" y="27" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+    <rect x="87" y="77" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+    <rect x="62" y="27" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+    <rect x="62" y="77" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  </g>
+  <circle cx="90" cy="55" r="10" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <g>
+    <polyline points="90,40 90,45" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+    <polyline points="90,65 90,72" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+    <polyline points="65,40 65,70" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+    <polyline points="60,50 65,55" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+    <polyline points="70,50 65,55" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+    <polyline points="100,55 80,55" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+    <polyline points="97,38 93,38" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+    <polyline points="95,36 95,40" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  </g>
+  <g font-family="'Times New Roman', serif" font-size="6" fill="black">
+    <text x="97" y="32">p</text>
+    <text x="97" y="82">n</text>
+    <text x="60" y="32" text-anchor="end">cp</text>
+    <text x="60" y="82" text-anchor="end">cn</text>
+  </g>
+  <text x="104" y="55" font-family="'Times New Roman', serif" font-size="7" fill="rgb(17,162,41)">X1</text>
+</svg>

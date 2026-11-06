@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="27 10 58 68" width="580" height="680">
+  <rect x="27" y="10" width="58" height="68" fill="white"/>
+  <polyline points="45,20 45,30" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <polyline points="45,70 45,60" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <rect x="42" y="17" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <rect x="42" y="67" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <circle cx="45" cy="45" r="15" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="47,34 43,34" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="45,36 45,32" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="36,50 40,50 43,39 48,39 50,50 55,50" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="45,30 45,26" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="45,60 45,64" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <text x="50" y="26" font-family="'Times New Roman', serif" font-size="6" fill="black">p</text>
+  <text x="50" y="72" font-family="'Times New Roman', serif" font-size="6" fill="black">n</text>
+  <text x="63" y="47" font-family="'Times New Roman', serif" font-size="7" fill="rgb(17,162,41)">V1</text>
+</svg>

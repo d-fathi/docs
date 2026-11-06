@@ -15,6 +15,7 @@ Description::
          run with a small sine (the full non-linear model)
       3. op-amp inverting amplifier with a single-pole open loop (gain-bandwidth)
 
+
 Code
 ----
 

@@ -1,19 +1,20 @@
-Piece-wise Linear Voltage
-=========================
+PWL Voltage
+===========
 
 .. code-block:: python
 
     from pyams.models import PWLVoltage
 
-    X1 = PWLVoltage("p", "n")
-    X1.setParams("Td=0 Scale=1")
+    V1 = PWLVoltage("p", "n")
+    V1.setPoints("0 0, 1m 5, 2m 5, 3m 0")      # SI prefixes allowed
+    V1.setParams("Rep=1")
 
 Terminals
 ---------
 
-``PWLVoltage(p, n, points=None)``
+``PWLVoltage(p, n)``
 
-Optional constructor arguments: ``points`` (default ``None``).
+``p`` is the positive terminal: V(p) - V(n) = V.
 
 Parameters
 ----------
@@ -32,7 +33,7 @@ Parameters
      - Delay
    * - ``Scale``
      - 1
-     - –
+     - -
      - Amplitude scale
    * - ``Voff``
      - 0
@@ -40,36 +41,79 @@ Parameters
      - Offset
    * - ``Rep``
      - 0
-     - –
+     - -
      - Repeat (1) or single shot (0)
+
+Symbol
+------
+
+.. figure:: /_static/images/symbols/PWLVoltage_symbol.svg
+   :alt: PWL voltage source symbol
+   :align: center
+   :width: 160px
+
+   PWL voltage source symbol as displayed in the PyAMS application.
 
 Description
 -----------
 
-The documentation of the class (``help(PWLVoltage)``)::
+This class implements a piece-wise linear voltage source (SPICE ``PWL``): the voltage is
+defined by a list of (time, value) points and linearly interpolated between them.
 
-    Piece-wise linear voltage source (SPICE ``PWL``): the voltage is defined by
-    a list of (time, value) points and linearly interpolated between them.
+.. math::
 
-        V(t) = Scale * pwl(t - Td) + Voff
+   V(t) = \text{Scale} \cdot pwl(t - T_d) + V_{off}
 
-    Before the first point it holds the first value, after the last point it
-    holds the last value. Two points with the same time make a vertical step.
-    With Rep = 1 the waveform between the first and last points repeats.
+Before the first point it holds the first value, after the last point it holds
+the last value. Two points with the same time make a vertical step. With
+``Rep = 1`` the waveform between the first and last points repeats. The DC
+(operating point) value is the waveform value at ``t = 0``.
 
-    Terminals: PWLVoltage(p, n)   (V(p) - V(n) = V)
-    Points can be given in the constructor or later:
-        V1 = PWLVoltage("a", "0", points=[(0, 0), (1e-3, 5), (2e-3, 5), (3e-3, 0)])
-        V1.setPoints("0 0, 1m 5, 2m 5, 3m 0")        # SI prefixes allowed
-    Parameters:
-        Td    delay (s)             (0)
-        Scale amplitude factor      (1)
-        Voff  offset (V)            (0)
-        Rep   1 = repeat, 0 = once  (0)
-    The DC (operating point) value is the waveform value at t = 0.
+The points can be given in the constructor, as a list of ``(t, value)`` pairs or
+as a string (SI prefixes allowed), or later with ``setPoints()``. The default
+points are (0, 0), (1 ms, 5 V), (2 ms, 5 V), (3 ms, 0).
 
-Used in the examples
---------------------
+**Attributes**
 
-* :doc:`PWL sources: arbitrary waveform from (time, value) points </examples/pwl_sources>`
+* ``V`` (signal): Output voltage between nodes (p, n).
+* ``Td`` (param): Delay in seconds, default is 0.
+* ``Scale`` (param): Amplitude scale factor, default is 1.
+* ``Voff`` (param): Offset in Volts (V), default is 0.
+* ``Rep`` (param): 1 = repeat, 0 = single shot, default is 0.
 
+**Methods**
+
+* ``setPoints(points)``: Sets the waveform points (a list of pairs, a flat list or a string).
+* ``analog()``: Interpolates the waveform at the current simulation time.
+
+Source Code
+-----------
+
+.. code-block:: python
+
+    from bisect import bisect_right
+    from pyams.lib import signal, param, model, time
+    from pyams.lib import voltage
+    from pyams.lib import _parse_value
+
+
+    # parse_points(), pwl_value() and pwl_eval() are helper functions of the same file
+
+
+    class PWLVoltage(model):
+
+        def __init__(self, p, n, points=None):
+            self.V = signal('out', voltage, p, n)
+            self.Td = param(0.0, 's', 'Delay')
+            self.Scale = param(1.0, ' ', 'Amplitude scale')
+            self.Voff = param(0.0, 'V', 'Offset')
+            self.Rep = param(0.0, ' ', 'Repeat (1) or single shot (0)')
+            self.setPoints(points if points is not None
+                           else [(0.0, 0.0), (1e-3, 5.0), (2e-3, 5.0), (3e-3, 0.0)])
+
+        def setPoints(self, points):
+            self._ts, self._vs = parse_points(points, 'V')
+
+        def analog(self):
+            y = pwl_eval(float(time), self._ts, self._vs, float(self.Td), float(self.Rep) > 0.5)
+            self.V += float(self.Scale) * y + float(self.Voff)

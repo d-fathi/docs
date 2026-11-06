@@ -13,6 +13,9 @@ Terminals
 
 ``CCCS(p, n, cp, cn)``
 
+* ``p``, ``n``: output port. The current ``Gain * Ic`` flows through the source from ``p`` to ``n``.
+* ``cp``, ``cn``: control branch. ``Ic`` is the current that flows through it from ``cp`` to ``cn``.
+
 Parameters
 ----------
 
@@ -29,35 +32,65 @@ Parameters
      - A/A
      - Current gain
 
+Symbol
+------
+
+.. figure:: /_static/images/symbols/CCCS_symbol.svg
+   :alt: Current-Controlled Current Source (CCCS) symbol
+   :align: center
+   :width: 260px
+
+   Current-Controlled Current Source (CCCS) symbol as displayed in the PyAMS application.
+
 Description
 -----------
 
-The documentation of the class (``help(CCCS)``)::
+This class implements a current-controlled current source (SPICE ``F`` element, a
+current mirror / current amplifier).
 
-    Current-controlled current source (SPICE "F" element, a current mirror /
-    current amplifier):
+``Ic`` is the current that flows through the control branch from ``cp`` to ``cn``.
+The control branch is built into the element: it is a zero-volt source, an
+ideal ammeter, so connect ``(cp, cn)`` **in series** with the branch whose
+current controls the source (the current enters at ``cp`` and leaves at ``cn``).
+The output current ``Gain * Ic`` flows through the source from ``p`` to ``n``.
 
-        i(p -> n) = Gain * Ic
+**Attributes**
 
-    Ic is the current that flows through the control branch from cp to cn.  The
-    control branch is built into the element: it is a zero-volt source, an
-    ideal ammeter, so connect (cp, cn) IN SERIES with the branch whose current
-    controls the source (the current enters at cp and leaves at cn).  The
-    output current Gain*Ic flows through the source from p to n.
+* ``Vs`` (signal): The 0 V sensing branch between cp and cn.
+* ``Ic`` (signal): Its current, from cp to cn.
+* ``I`` (signal): Output current from p to n.
+* ``Gain`` (param): Current gain in A/A, default is 1.
 
-    Typical uses: the beta*ib generator of a transistor model, an ideal current
-    mirror, the primary current of an ideal transformer.
+**Methods**
 
-    Terminals: CCCS(p, n, cp, cn).
+* ``analog()``: Defines the source behavior using the equation:
 
-    Attributes:
-        Vs (signal): the 0 V sensing branch between cp and cn.
-        Ic (signal): its current, from cp to cn.
-        I  (signal): output current from p to n.
-        Gain (param): current gain, A/A (default 1).
+  .. math::
 
-Used in the examples
---------------------
+     i(p \rightarrow n) = \text{Gain} \cdot I_c
 
-* :doc:`Dependent (controlled) sources: VCVS, CCVS, VCCS, CCCS </examples/dependent_sources>`
+.. note::
 
+   Typical uses: the ``beta*ib`` generator of a transistor model, an ideal
+   current mirror, the primary current of an ideal transformer.
+
+Source Code
+-----------
+
+.. code-block:: python
+
+    from pyams.lib import signal, param, model
+    from pyams.lib import voltage, current
+
+
+    class CCCS(model):
+
+        def __init__(self, p, n, cp, cn):
+            self.Vs = signal('out', voltage, cp, cn)       # zero-volt ammeter
+            self.Ic = signal('in', current, cp, cn)
+            self.I = signal('out', current, p, n)
+            self.Gain = param(1.0, 'A/A', 'Current gain')
+
+        def analog(self):
+            self.Vs += 0.0
+            self.I += self.Gain * self.Ic
