@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="78 25 48 51" width="528" height="561">
+  <rect x="78" y="25" width="48" height="51" fill="white"/>
+  <polyline points="85,55 90,55" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <polyline points="120,55 115,55" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <rect x="82" y="52" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <rect x="117" y="52" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <polyline points="110,38 110,70" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="96,55 90,55" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="115,55 110,55" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polygon points="96,70 109,60 96,50" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polygon points="110,58 97,48 110,38" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="96,38 96,70" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <text x="100" y="33" font-family="'Times New Roman', serif" font-size="7" fill="rgb(17,162,41)" >D1</text>
+  <text x="82" y="64" font-family="'Times New Roman', serif" font-size="6" fill="black" >p</text>
+  <text x="117" y="64" font-family="'Times New Roman', serif" font-size="6" fill="black" >n</text>
+</svg>

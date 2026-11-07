@@ -12,10 +12,14 @@ Tunnel Diode                                  :doc:`TunnelDiode <TunnelDiode>`
 Diac                                          :doc:`Diac <Diac>`
 Thyristor (SCR)                               :doc:`Thyristor <Thyristor>`
 Unijunction Transistor (UJT)                  :doc:`UJT <UJT>`
-BJT                                           :doc:`BJT <BJT>`
-MOSFET                                        :doc:`MOSFET <MOSFET>`
-MOSFET (4 terminals)                          :doc:`MOSFET4 <MOSFET4>`
-JFET                                          :doc:`JFET <JFET>`
+BJT (type n)                                  :doc:`NPN <NPN>`
+BJT (type p)                                  :doc:`PNP <PNP>`
+MOSFET (type n)                               :doc:`NMOSFET <NMOS>`
+MOSFET (type p)                               :doc:`PMOSFET <PMOS>`
+MOSFET (type n-4 terminals)                   :doc:`NMOS4 <NMOS4>`
+MOSFET (type p-4 terminals)                   :doc:`PMOS4 <PMOS4>`
+JFET  (type n)                                :doc:`NJFET <NJFET>`
+JFET  (type p)                                :doc:`PJFET <PJFET>`
 IGBT                                          :doc:`IGBT <IGBT>`
 ============================================= ==========================================
 
@@ -29,8 +33,12 @@ IGBT                                          :doc:`IGBT <IGBT>`
    Diac
    Thyristor
    UJT
-   BJT
-   MOSFET
-   MOSFET4
-   JFET
+   NPN
+   PNP
+   NMOS
+   PMOS
+   NMOS4
+   PMOS4
+   NJFET
+   PJFET
    IGBT

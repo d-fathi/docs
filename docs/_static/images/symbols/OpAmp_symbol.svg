@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="56 44 84 54" width="840" height="540">
+  <rect x="56" y="44" width="84" height="54" fill="white"/>
+  <polygon points="75,51 118,70 75,89" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="65,60 75,60" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <polyline points="65,80 75,80" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <polyline points="130,70 120,70" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <rect x="62" y="57" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <rect x="62" y="77" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <rect x="127" y="67" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <polyline points="125,70 117,70" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="75,60 68,60" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="75,80 68,80" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <text x="77" y="62" font-family="Arial" font-size="7" fill="black">+</text>
+  <text x="77" y="82" font-family="Arial" font-size="7" fill="black">&#8722;</text>
+  <text x="92" y="56" font-family="'Times New Roman', serif" font-size="7" fill="rgb(17,162,41)">U1</text>
+  <text x="61" y="55" font-family="'Times New Roman', serif" font-size="6" fill="black">p</text>
+  <text x="61" y="91" font-family="'Times New Roman', serif" font-size="6" fill="black">n</text>
+  <text x="124" y="65" font-family="'Times New Roman', serif" font-size="6" fill="black">out</text>
+</svg>

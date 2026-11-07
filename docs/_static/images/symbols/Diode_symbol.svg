@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="78 38 48 38" width="576" height="456">
+  <rect x="78" y="38" width="48" height="38" fill="white"/>
+  <polyline points="85,60 90,60" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <polyline points="120,60 115,60" fill="none" stroke="rgb(255,0,0)" stroke-width="1"/>
+  <rect x="82" y="57" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <rect x="117" y="57" width="6" height="6" fill="none" stroke="rgb(0,200,0)" stroke-width="1"/>
+  <polyline points="111,50 111,70" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="98,60 90,60" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polyline points="115,60 111,60" fill="none" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <polygon points="96,70 110,60 96,50" fill="rgb(255,255,127)" stroke="rgb(33,150,243)" stroke-width="1"/>
+  <text x="98" y="45" font-family="'Times New Roman', serif" font-size="7" fill="rgb(17,162,41)" >D1</text>
+  <text x="82" y="68" font-family="'Times New Roman', serif" font-size="6" fill="black" >p</text>
+  <text x="117" y="68" font-family="'Times New Roman', serif" font-size="6" fill="black" >n</text>
+</svg>
