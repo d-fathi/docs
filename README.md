@@ -1,20 +1,10 @@
-Welcome to the PyAMS documentation
-==================================
+# Welcome to the PyAMS documentation
 
-.. image:: https://img.shields.io/pypi/v/pyams-lib.svg
-    :target: https://pypi.org/project/pyams-lib/
-    :alt: PyPI version
 
-.. image:: https://img.shields.io/pypi/pyversions/pyams-lib.svg
-    :target: https://pypi.org/project/pyams-lib/
-    :alt: Supported Python versions
 
-.. image:: https://img.shields.io/github/license/d-fathi/pyams_lib.svg
-    :target: https://github.com/d-fathi/pyams_lib/blob/main/LICENSE
-    :alt: License
 
-What is PyAMS?
---------------
+##What is PyAMS?
+
 
 **PyAMS** (*Python for Analog and Mixed Signals*) is a Python library for modeling and
 simulating analog and mixed-signal electronic circuits. It provides:
@@ -27,3 +17,15 @@ simulating analog and mixed-signal electronic circuits. It provides:
 
   1. **VS Code**, with the *PyAMS extension*.
   2. The **PyAMS software**: https://pyams.sf.net
+  
+  
+## Related projects
+
+- **Documentation:** https://pyams-lib.readthedocs.io/
+- **Source code:** https://github.com/d-fathi/pyams
+- **Package on PyPI:** https://pypi.org/project/pyams-lib/
+- **Circuit design with a graphical (CAD) front-end:** https://pyams.sf.net/
+
+## License
+
+PyAMS is free software distributed under the **MIT** license.
