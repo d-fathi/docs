@@ -3,7 +3,7 @@
 
 
 
-##What is PyAMS?
+## What is PyAMS?
 
 
 **PyAMS** (*Python for Analog and Mixed Signals*) is a Python library for modeling and
